@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": "node .claude/hooks/check-types.mjs"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": "node .claude/hooks/protect-tests.mjs"
+      }
+    ]
+  }
+}
