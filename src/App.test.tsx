@@ -16,6 +16,19 @@ describe("App", () => {
     expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(2);
   });
 
+  test("clears the search field with the clear button", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    const search = screen.getByLabelText("Search");
+    const clear = screen.getByRole("button", { name: "Clear search" });
+    expect(clear).toBeDisabled();
+    await user.type(search, "dune");
+    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(1);
+    await user.click(clear);
+    expect(search).toHaveValue("");
+    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(5);
+  });
+
   test("marks a book as read", async () => {
     const user = userEvent.setup();
     render(<App />);
